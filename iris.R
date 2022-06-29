@@ -97,22 +97,13 @@ library(ggbiplot)
 
 iris.pca <- prcomp(iris[, 1:4], center = TRUE, scale = TRUE)
 
-e <- eigen(iris.pca$rotation)
+summary(iris.pca)$importance
 
-x <- e$values
-i<-0
-for (val in x) {
-  i<-i+1
-  xw <- val/sum(x) * 100
-  pc <- paste0("PC", i)
-  ans <- paste(pc, xw, sep=": ")
-  print(ans)
-}
+ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, choices=c(2,3))
 
 ggbiplot(iris.pca)
 ggbiplot(iris.pca, labels=rownames(iris))
 ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species)
-ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, choices=c(2,3))
 ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, circle=TRUE)
 ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, obs.scale = 1, var.scale = 1)
 ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, obs.scale = 1, var.scale = 1, var.axes=FALSE)

@@ -104,18 +104,7 @@ library(devtools)
 library(ggbiplot)
 
 prc.pca <- prcomp(prc[, 3:9], center = TRUE, scale = TRUE)
-
-e <- eigen(prc.pca$rotation)
-
-x <- e$values
-i<-0
-for (val in x) {
-  i<-i+1
-  xw <- val/sum(x) * 100
-  pc <- paste0("PC", i)
-  ans <- paste(pc, xw, sep=": ")
-  print(ans)
-}
+summary(prc.pca)$importance
 
 
 ggbiplot(prc.pca)
