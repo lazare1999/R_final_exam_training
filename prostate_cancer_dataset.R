@@ -16,6 +16,13 @@ library(caTools)
 library(party)
 library(dplyr)
 library(magrittr)
+library(cvms)
+library(tibble)
+library(randomForest)
+library(e1071)
+library(caret)
+library(devtools)
+library(ggbiplot)
 
 # setwd("dataset")
 prc <- read.csv("Prostate_Cancer.csv", stringsAsFactors = FALSE)
@@ -43,10 +50,6 @@ y_test <- y[91:100,]
 
 
 # 2. გამოიყენეთ Random Forest და Decision Trees ალგორითმები
-library(cvms)
-library(tibble)
-library(caTools)
-library(randomForest)
 
 classifier_RF <- randomForest(x = x_train,
                               y = y_train,
@@ -58,12 +61,6 @@ confusion_mtx <- table(y_test, y_pred)
 ac_test <- sum(diag(confusion_mtx)) / sum(confusion_mtx)
 print(paste("randomForest: ", ac_test, sep=" "))
 
-
-library(datasets)
-library(caTools)
-library(party)
-library(dplyr)
-library(magrittr)
 
 png(file = "decision_tree.png")
 x_train$diagnosis_result <- y_train
@@ -78,9 +75,6 @@ print(paste("ctree: ", ac_test, sep=" "))
 
 
 # 3. გამოიყენეთ Naïve Bayes ალგორითმი
-library(e1071)
-library(caTools)
-library(caret)
 
 set.seed(120) # Setting Seed
 classifier_cl <- naiveBayes(diagnosis_result ~ ., data = x_train)
@@ -98,10 +92,6 @@ print(paste("naiveBayes: ", ac_test, sep=" "))
 #    მოახდინეთ ვივიზუალიზაციის პროცესში მოახდინეთ მონაცემების დაჯგუფება და ელიფსური გრაფიკების ქვეშ გაერთიანება
 #     Prostate_Cancer.csv ფაილის diagnosis_result სვეტის მიხედვით, რომელშიც მოცემული გვაქვს კლასიფიკაციის
 #     მნიშვნელობები( M და B ).
-
-
-library(devtools)
-library(ggbiplot)
 
 prc.pca <- prcomp(prc[, 3:9], center = TRUE, scale = TRUE)
 summary(prc.pca)$importance

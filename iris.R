@@ -16,6 +16,11 @@ library(caTools)
 library(party)
 library(dplyr)
 library(magrittr)
+library(e1071)
+library(caret)
+library(devtools)
+library(ggbiplot)
+library("class")
 
 iris$Species <- factor(iris$Species)
 
@@ -38,7 +43,6 @@ y_train <- y[1:130,]
 y_test <- y[131:150,]
 
 # 2. გამოიყენეთ K-NN და Decision Trees ალგორითმები
-library("class")
 y_test_pred <- knn(train = x_train, test = x_test, cl = y_train, k=8)
 
 df1 <- data.frame(LableId = 1:20, classific1=y_test)
@@ -51,12 +55,6 @@ v3 <- ifelse(v1==v2, 0, 1)
 ac_test <- 1-sum(v3)/length(v3)
 print(paste("knn: ", ac_test, sep=" "))
 
-# ამოცანა 5. (6 ქულა)
-library(datasets)
-library(caTools)
-library(party)
-library(dplyr)
-library(magrittr)
 
 png(file = "decision_tree.png")
 
@@ -71,10 +69,6 @@ ac_test <- sum(diag(m_at)) / sum(m_at)
 print(paste("ctree: ", ac_test, sep=" "))
 
 # 3. გამოიყენეთ Naïve Bayes ალგორითმი
-library(e1071)
-library(caTools)
-library(caret)
-
 set.seed(120) # Setting Seed
 classifier_cl <- naiveBayes(Species ~ ., data = x_train)
 
@@ -91,9 +85,6 @@ print(paste("naiveBayes: ", ac_test, sep=" "))
 #    ძირითადი კომპონენტების მნიშვნელობები, მოახდინეთ მონაცემების გრაფიკული დაჯგუფება და ელიფსური გრაფიკების ქვეშ გაერთიანება
 #    IRIS.csv ფაილის მე-5 სვეტის მიხედვით, რომელშიც მოცემული გვაქვს კლასიფიკაციის მნიშვნელობები( Iris-setosa, Iris-versicolor
 #    და Iris-virginica ).
-
-library(devtools)
-library(ggbiplot)
 
 iris.pca <- prcomp(iris[, 1:4], center = TRUE, scale = TRUE)
 
