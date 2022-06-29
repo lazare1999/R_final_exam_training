@@ -118,13 +118,13 @@ for (val in x) {
 }
 
 
-ggbiplot(iris.pca)
-ggbiplot(iris.pca, labels=rownames(iris))
-ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species)
-ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, choices=c(3,4))
-ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, circle=TRUE)
-ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, obs.scale = 1, var.scale = 1)
-ggbiplot(iris.pca, labels=rownames(iris), ellipse=TRUE, groups=iris$Species, obs.scale = 1, var.scale = 1, var.axes=FALSE)
+ggbiplot(prc.pca)
+ggbiplot(prc.pca, labels=rownames(prc))
+ggbiplot(prc.pca, labels=rownames(prc), ellipse=TRUE, groups=prc$diagnosis_result)
+ggbiplot(prc.pca, labels=rownames(prc), ellipse=TRUE, groups=prc$diagnosis_result, choices=c(3,4))
+ggbiplot(prc.pca, labels=rownames(prc), ellipse=TRUE, groups=prc$diagnosis_result, circle=TRUE)
+ggbiplot(prc.pca, labels=rownames(prc), ellipse=TRUE, groups=prc$diagnosis_result, obs.scale = 1, var.scale = 1)
+ggbiplot(prc.pca, labels=rownames(prc), ellipse=TRUE, groups=prc$diagnosis_result, obs.scale = 1, var.scale = 1, var.axes=FALSE)
 
 
 
